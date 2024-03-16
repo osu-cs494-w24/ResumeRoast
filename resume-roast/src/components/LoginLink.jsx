@@ -1,8 +1,8 @@
-export default function DropboxLoginLink() {
+export default function LoginLink() {
   const queryParams = new URLSearchParams({
-    client_id: import.meta.env.VITE_DROPBOX_CLIENT_ID,
-    redirect_uri: import.meta.env.VITE_OAUTH_REDIRECT_URL,
-    response_type: "code"
+      client_id: import.meta.env.VITE_DROPBOX_CLIENT_ID,
+      redirect_uri: import.meta.env.VITE_OAUTH_REDIRECT_URL,
+      response_type: "code"
   })
   const baseUrl = "https://www.dropbox.com/oauth2/authorize"
   const url = `${baseUrl}?${queryParams.toString()}`

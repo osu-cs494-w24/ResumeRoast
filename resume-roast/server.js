@@ -16,35 +16,35 @@ const port = 5173
 app.use(express.json())
 
 app.post("/api/tokenExchange", async (req, res) => {
-  const { code } = req.body
-  console.log("== code:", code)
-  if (!code) {
-    res.status(400).send({ err: "Must specify auth code" })
-  } else {
-    const dropboxRes = await fetch("https://www.dropbox.com/oauth2/token", {
-      method: "POST",
-      body: JSON.stringify({
-        client_id: client_key,
-        client_secret: client_secret,
-        code: code,
-        redirect_uri: "http://localhost:5173",
-        grant_type: "authorization_code"
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      }
-    })
-    const dropboxResBody = await dropboxRes.json()
-    if (dropboxResBody.access_token) {
-      access_token = dropboxResBody.access_token
-      res.status(200).send({ msg: "OK!" })
+    const { code } = req.body
+    console.log("== code:", code)
+    if (!code) {
+        res.status(400).send({ err: "Must specify auth code" })
     } else {
-      res.status(401).send({
-        err: dropboxResBody.error_description
-      })
+        const dropboxRes = await fetch("https://www.dropbox.com/oauth2/token", {
+        method: "POST",
+        body: JSON.stringify({
+            client_id: client_key,
+            client_secret: client_secret,
+            code: code,
+            redirect_uri: "http://localhost:5173",
+            grant_type: "authorization_code"
+        }),
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }
+        })
+        const dropboxResBody = await dropboxRes.json()
+        if (dropboxResBody.access_token) {
+            access_token = dropboxResBody.access_token
+            res.status(200).send({ msg: "OK!" })
+        } else {
+            res.status(401).send({
+                err: dropboxResBody.error_description
+            })
+        }
     }
-  }
 })
 
 app.listen(port, () => console.log(`API server listening on port ${port}`))

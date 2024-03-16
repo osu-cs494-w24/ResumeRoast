@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
-import DropboxLoginLink from '../components/DropboxLoginLink'
+import LoginLink from '../components/LoginLink'
+// import App from '../App.jsx'
 
-export default function DropboxLogin() {
+export default function Login() {
     const { hash } = useLocation();
     let access_token;
     const [ error, setError ] = useState("")
@@ -37,7 +38,8 @@ export default function DropboxLogin() {
     return (
         <div>
             {error && <p>Error: {error}</p>}
-            {success ? <p>Success!</p> : <DropboxLoginLink />}
+            {success ? <p>Success!</p> : <LoginLink />}
+            {/* {success ? <p>Success!</p> : <App />} */}
         </div>
     )
 }
