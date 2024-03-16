@@ -12,7 +12,7 @@ export default function Login() {
     console.log("== authCode:", authCode)
     useEffect(() => {
         async function exchangeForAccessToken(code) {
-        const res = await fetch("http://localhost:8000/api/tokenExchange", {
+        const res = await fetch("/api/tokenExchange", {
             method: "POST",
             body: JSON.stringify({ code }),
             headers: {

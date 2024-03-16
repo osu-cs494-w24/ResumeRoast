@@ -5,6 +5,7 @@ dotenv.config({ path: ".env.local" })
 
 const client_id = process.env.VITE_DROPBOX_CLIENT_ID
 const client_secret = process.env.DROPBOX_CLIENT_SECRET
+const redirect_uri = process.env.VITE_OAUTH_REDIRECT_URL
 let access_token = null
 
 console.log("== client_id:", client_id)
@@ -21,20 +22,22 @@ app.post("/api/tokenExchange", async (req, res) => {
     if (!code) {
         res.status(400).send({ err: "Must specify auth code" })
     } else {
-        const dropboxRes = await fetch("https://www.dropbox.com/oauth2/token", {
-        method: "POST",
-        body: JSON.stringify({
-            client_id: client_id,
-            client_secret: client_secret,
-            code: code,
-            grant_type: "authorization_code"
-        }),
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        }
+        const dropboxRes = await fetch("https://api.dropbox.com/oauth2/token", {
+            method: "POST",
+            body: JSON.stringify({
+                code: code,
+                grant_type: "authorization_code",
+                redirect_uri: redirect_uri,
+                client_id: client_id,
+                client_secret: client_secret,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
         })
         const dropboxResBody = await dropboxRes.json()
+        console.log("==BODY: ", dropboxResBody);
         if (dropboxResBody.access_token) {
             access_token = dropboxResBody.access_token
             res.status(200).send({ msg: "OK!" })
