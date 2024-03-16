@@ -1,23 +1,18 @@
 import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 
 import LoginLink from '../components/LoginLink'
-// import App from '../App.jsx'
 
 export default function Login() {
-    const { hash } = useLocation();
-    let access_token;
     const [ error, setError ] = useState("")
+    const [ searchParams, setSearchParams ] = useSearchParams()
     const [ success, setSuccess ] = useState(false)
-
-    if (hash) {
-        access_token = hash.split("=")[1].split("&")[0];
-    }
-
-    console.log("== access_token:", access_token)
+    const authCode = searchParams.get("code")
+    
+    console.log("== authCode:", authCode)
     useEffect(() => {
         async function exchangeForAccessToken(code) {
-        const res = await fetch("https://api.dropboxapi.com/oauth2/token", {
+        const res = await fetch("http://localhost:8000/api/tokenExchange", {
             method: "POST",
             body: JSON.stringify({ code }),
             headers: {
@@ -30,16 +25,15 @@ export default function Login() {
             setSuccess(true)
         }
         }
-        if (access_token) {
-            exchangeForAccessToken(access_token)
+        if (authCode) {
+            exchangeForAccessToken(authCode)
         }
-    }, [ access_token ])
+    }, [ authCode ])
 
     return (
         <div>
             {error && <p>Error: {error}</p>}
             {success ? <p>Success!</p> : <LoginLink />}
-            {/* {success ? <p>Success!</p> : <App />} */}
         </div>
     )
 }

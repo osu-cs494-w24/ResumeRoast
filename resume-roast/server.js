@@ -3,15 +3,15 @@ import dotenv from 'dotenv'
 
 dotenv.config({ path: ".env.local" })
 
-const client_key = process.env.VITE_DROPBOX_CLIENT_ID
+const client_id = process.env.VITE_DROPBOX_CLIENT_ID
 const client_secret = process.env.DROPBOX_CLIENT_SECRET
 let access_token = null
 
-console.log("== client_key:", client_key)
+console.log("== client_id:", client_id)
 console.log("== client_secret:", client_secret)
 
 const app = express()
-const port = 5173
+const port = 8000
 
 app.use(express.json())
 
@@ -24,10 +24,9 @@ app.post("/api/tokenExchange", async (req, res) => {
         const dropboxRes = await fetch("https://www.dropbox.com/oauth2/token", {
         method: "POST",
         body: JSON.stringify({
-            client_id: client_key,
+            client_id: client_id,
             client_secret: client_secret,
             code: code,
-            redirect_uri: "http://localhost:5173",
             grant_type: "authorization_code"
         }),
         headers: {
