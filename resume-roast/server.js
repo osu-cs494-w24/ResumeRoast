@@ -18,26 +18,28 @@ app.use(express.json())
 
 app.post("/api/tokenExchange", async (req, res) => {
     const { code } = req.body
-    console.log("== code:", code)
     if (!code) {
         res.status(400).send({ err: "Must specify auth code" })
     } else {
-        const dropboxRes = await fetch("https://api.dropbox.com/oauth2/token", {
-            method: "POST",
-            body: JSON.stringify({
-                code: code,
-                grant_type: "authorization_code",
-                redirect_uri: redirect_uri,
-                client_id: client_id,
-                client_secret: client_secret,
-            }),
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
+        const baseUrl = "https://api.dropbox.com/oauth2/token"
+        const queryParams= new URLSearchParams({
+            code: code,
+            grant_type: "authorization_code",
+            redirect_uri: redirect_uri,
+            client_id: client_id,
+            client_secret: client_secret,
         })
+        const fetchOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }
+        const url = `${baseUrl}?${queryParams.toString()}`
+        const dropboxRes = await fetch(url, fetchOptions);
+
         const dropboxResBody = await dropboxRes.json()
-        console.log("==BODY: ", dropboxResBody);
+
         if (dropboxResBody.access_token) {
             access_token = dropboxResBody.access_token
             res.status(200).send({ msg: "OK!" })
