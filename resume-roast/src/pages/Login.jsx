@@ -14,21 +14,21 @@ export default function Login() {
     console.log("== authCode:", authCode)
     useEffect(() => {
         async function exchangeForAccessToken(code) {
-        const res = await fetch("/api/tokenExchange", {
-            method: "POST",
-            body: JSON.stringify({ code }),
-            headers: {
-                "Content-Type": "application/json"
+            const res = await fetch("/api/tokenExchange", {
+                method: "POST",
+                body: JSON.stringify({ code }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            if (res.status !== 200) {
+                setError("Error exchanging code for token")
+            } else {
+                let expires = new Date()
+                expires.setTime(expires.getTime() + (14400000)) // Token lasts 4 hours
+                setCookie('authCode', authCode, {path: '/', expires})
+                setSuccess(true)
             }
-        })
-        if (res.status !== 200) {
-            setError("Error exchanging code for token")
-        } else {
-            let expires = new Date()
-            expires.setTime(expires.getTime() + (14400000)) // Token lasts 4 hours
-            setCookie('authCode', authCode, {path: '/', expires})
-            setSuccess(true)
-        }
         }
         if (authCode) {
             exchangeForAccessToken(authCode)
