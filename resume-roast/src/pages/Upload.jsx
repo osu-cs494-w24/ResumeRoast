@@ -49,10 +49,10 @@ export default function Login() {
 
     return (
         <div {...getRootProps()}>
-            <input {...getInputProps} />
+            <input {...getInputProps()} />
             <p>
                 {success && "File uploaded! Check Console."}
-                {error && "Error uploading resume. Check Console."}
+                {error && !success && "Error uploading resume."}
                 {!success && !error && "Drag 'n' drop your resume here, or click to select the file"}
             </p>
         </div>

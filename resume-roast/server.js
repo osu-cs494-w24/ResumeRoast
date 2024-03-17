@@ -86,6 +86,7 @@ app.post("/api/upload", async (req, res) => {
         }
         const dropboxRes = await fetch(url, fetchOptions);
         const dropboxResBody = await dropboxRes.json()
+        console.log(dropboxResBody)
         if(!dropboxResBody){
             res.status(500).send({err: "Error uploading pdf to Dropbox"})
         }
@@ -112,6 +113,9 @@ app.post("/api/upload", async (req, res) => {
         }
         const shareRes= await fetch(shareURL, shareOptions);
         const shareResBody = await shareRes.json()
+        //If the pdf is not changed, the response body won't have a URL
+        if(!shareResBody.url)
+            res.status(208).send()
 
         if(!pdfLinks[tokens[code].id])
             pdfLinks[tokens[code].id] = []

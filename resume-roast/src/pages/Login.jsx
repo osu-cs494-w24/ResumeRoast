@@ -36,7 +36,7 @@ export default function Login() {
 
     return (
         <div>
-            {error && <p>Error: {error}</p>}
+            {error && !success && <p>Error: {error}</p>}
             {success ? <p>Success!</p> : <LoginLink />}
         </div>
     )
