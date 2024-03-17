@@ -11,7 +11,6 @@ export default function Login() {
     const [ cookies, setCookie ] = useCookies(["authCode"])
     const authCode = searchParams.get("code")
     
-    console.log("== authCode:", authCode)
     useEffect(() => {
         async function exchangeForAccessToken(code) {
             const res = await fetch("/api/tokenExchange", {

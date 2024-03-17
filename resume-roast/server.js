@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import fs from 'fs'
+import bodyParser from 'body-parser'
 
 dotenv.config({ path: ".env.local" })
 
@@ -17,6 +18,7 @@ let data = JSON.parse(fs.readFileSync('data.json'));
 let tokens = {};
 
 app.use(express.json())
+app.use(bodyParser.raw({type: 'application/octet-stream', limit: '150mb'}))
 
 app.post("/api/tokenExchange", async (req, res) => {
     const { code } = req.body
@@ -43,6 +45,7 @@ app.post("/api/tokenExchange", async (req, res) => {
         const dropboxResBody = await dropboxRes.json()
 
         if (dropboxResBody.access_token) {
+            tokens[code] = {}
             tokens[code].token = dropboxResBody.access_token
             tokens[code].id    = dropboxResBody.account_id
             // Delete token association when the token expires
@@ -57,7 +60,42 @@ app.post("/api/tokenExchange", async (req, res) => {
 })
 
 app.post("/api/upload", async (req, res) => {
+    const code = req.headers['auth-code']
+    const pdf = new Uint8Array(req.body)
+    if(!code || !tokens[code]){
+        res.status(400).send({err: "Must specify auth code"})
+    } else if(!pdf){
+        res.status(400).send({err: "Must include pdf data"})
+    } else {
+        const url = "https://content.dropboxapi.com/2/files/upload"
+        const args = {
+            "autorename": true,
+            "mode": "add",
+            "mute": false,
+            "path": "/resume.pdf",
+            "strict_conflict": false
+        }
+        const fetchOptions = {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + tokens[code].token,
+                'Dropbox-API-Arg': JSON.stringify(args),
+                'Content-Type': 'application/octet-stream'
+            },
+            body: pdf
+        }
+        const dropboxRes = await fetch(url, fetchOptions);
+        const dropboxResBody = await dropboxRes.json()
+        if(!dropboxResBody){
+            res.status(500).send({err: "Error uploading pdf to Dropbox"})
+        }
+        
+        // Path in dropboxResBody.path_lower... Or dropboxResBody.path_display
+        // Get Shareable Link!
 
+
+        res.status(200).send({msg: "Aha!"})
+    }
 });
 app.get("/api/allpdfs", async (req, res) => {
 

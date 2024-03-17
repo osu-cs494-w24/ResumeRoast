@@ -58,9 +58,10 @@ npm run dev # Runs the webserver, and proxies /api to :8000
 
 ```json
 "method": "POST",
-"body": {
-    "code": "{Authentication Code granted by Dropbox}",
-    "pdf": "{base64 URL encoded PDF file}"
+"body": //{Byte array of PDF file}
+"header": {
+    "Auth-Code": "{Authentication Code granted by Dropbox}",
+    "Content-Type": "application/octet-stream",
 }
 ```
 <center><p align="center">:arrow_down:</p></center>
