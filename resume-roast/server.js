@@ -2,6 +2,8 @@ import express from 'express'
 import dotenv from 'dotenv'
 import fs from 'fs'
 import bodyParser from 'body-parser'
+import pdf2img from 'pdf-img-convert'
+import { Buffer } from 'buffer';
 
 dotenv.config({ path: ".env.local" })
 
@@ -50,7 +52,7 @@ app.post("/api/tokenExchange", async (req, res) => {
             tokens[code].id    = dropboxResBody.account_id
             // Delete token association when the token expires
             setTimeout(()=>{delete tokens[code]}, dropboxResBody.expires_in * 1000)
-            res.status(200).send({ msg: "OK!" })
+            res.status(200).send()
         } else {
             res.status(401).send({
                 err: dropboxResBody.error_description
@@ -116,15 +118,34 @@ app.post("/api/upload", async (req, res) => {
         //If the pdf is not changed, the response body won't have a URL
         if(!shareResBody.url)
             res.status(208).send()
+        else{
+            //Render a new thumbnail! && Update link database
+            console.log("Checking " + "thumbnails/"+tokens[code].id.split(':')[1]+".png")
+            if(fs.existsSync("thumbnails/"+tokens[code].id.split(':')[1]+".png"))
+                fs.unlinkSync("thumbnails/"+tokens[code].id.split(':')[1]+".png")
+            const image = await pdf2img.convert(pdf, {
+                width: 850,
+                page_numbers: [1]
+            })
+            fs.writeFile(
+                "thumbnails/" + tokens[code].id.split(':')[1] + ".png", 
+                image[0], 
+                function (error) {
+                    if (error)
+                        console.error("Error: " + error)
+                    else
+                        console.log("Successfully wrote new thumbnail image")
+                }
+            )
 
-        if(!pdfLinks[tokens[code].id])
-            pdfLinks[tokens[code].id] = []
-        pdfLinks[tokens[code].id].unshift(shareResBody.url)
+            if(!pdfLinks[tokens[code].id])
+                pdfLinks[tokens[code].id] = []
+            pdfLinks[tokens[code].id].unshift(shareResBody.url)
+            // Update """database"""
+            fs.writeFileSync('data.json', JSON.stringify(pdfLinks));
+        }
 
-        // Update """database"""
-        fs.writeFileSync('data.json', JSON.stringify(pdfLinks));
-
-        res.status(200).send({msg: shareResBody.url})
+        res.status(200).send({link: shareResBody.url, version: pdfLinks[tokens[code].id].length})
     }
 });
 app.get("/api/allpdfs", async (req, res) => {
@@ -136,9 +157,16 @@ app.get("/api/allpdfs", async (req, res) => {
 app.get("/api/pdf", async (req, res) => {
     const { id, version } = req.query
     if(pdfLinks[id][version? version : 0])
-        res.status(200).send(pdfLinks[id][version? version : 0])
+        res.status(200).send({link: pdfLinks[id][version? version : 0]})
     else
         res.status(404).send()
 });
+app.get("/api/thumbnail", async (req, res) => {
+    const {id} = req.query
+    if(fs.existsSync("thumbnails/"+id.split(':')[1]+".png"))
+        res.status(200).contentType("image/png").send(fs.readFileSync("thumbnails/"+id.split(':')[1]+".png"))
+    else
+        res.status(404).send()
+})
 
 app.listen(port, () => console.log(`API server listening on port ${port}`))
