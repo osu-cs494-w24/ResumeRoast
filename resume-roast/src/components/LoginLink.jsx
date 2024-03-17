@@ -1,3 +1,7 @@
+import TopBar from '../pages/TopBar'
+
+import {NavLink} from 'react-router-dom'
+
 export default function LoginLink() {
   const queryParams = new URLSearchParams({
     client_id: import.meta.env.VITE_DROPBOX_CLIENT_ID,
@@ -9,5 +13,15 @@ export default function LoginLink() {
 
   console.log("== url:", url)
 
-  return <a href={url}>Login with Dropbox</a>
+  return (
+    <>
+    <button className="homepage" onClick={() => console.log('Button clicked!')}>
+    <NavLink to = "/" className = "homelink"> <img src="https://cdn-icons-png.freepik.com/256/10263/10263239.png" alt="Homepage"/> </NavLink>
+    </button>
+
+    <h1> Resume Roasts! </h1>    
+    
+    <a href={url}>Login with Dropbox</a>
+    </>
+  )
 }
