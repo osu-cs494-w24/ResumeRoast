@@ -1,18 +1,20 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import fs from 'fs'
 
 dotenv.config({ path: ".env.local" })
 
 const client_id = process.env.VITE_DROPBOX_CLIENT_ID
 const client_secret = process.env.DROPBOX_CLIENT_SECRET
 const redirect_uri = process.env.VITE_OAUTH_REDIRECT_URL
-let access_token = null
 
 console.log("== client_id:", client_id)
 console.log("== client_secret:", client_secret)
 
 const app = express()
 const port = 8000
+let data = JSON.parse(fs.readFileSync('data.json'));
+let tokens = {};
 
 app.use(express.json())
 
@@ -41,7 +43,10 @@ app.post("/api/tokenExchange", async (req, res) => {
         const dropboxResBody = await dropboxRes.json()
 
         if (dropboxResBody.access_token) {
-            access_token = dropboxResBody.access_token
+            tokens[code].token = dropboxResBody.access_token
+            tokens[code].id    = dropboxResBody.account_id
+            // Delete token association when the token expires
+            setTimeout(()=>{delete tokens[code]}, dropboxResBody.expires_in * 1000)
             res.status(200).send({ msg: "OK!" })
         } else {
             res.status(401).send({
@@ -50,5 +55,15 @@ app.post("/api/tokenExchange", async (req, res) => {
         }
     }
 })
+
+app.post("/api/upload", async (req, res) => {
+
+});
+app.get("/api/allpdfs", async (req, res) => {
+
+});
+app.get("/api/pdf", async (req, res) => {
+
+});
 
 app.listen(port, () => console.log(`API server listening on port ${port}`))
