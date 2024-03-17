@@ -21,7 +21,7 @@ npm run dev # Runs the webserver, and proxies /api to :8000
 ## Routes
 
 <details>
-<summary> Undocumented Routes </summary>
+<summary> Website Routes </summary>
 
 #### :house: /
 
@@ -36,6 +36,9 @@ npm run dev # Runs the webserver, and proxies /api to :8000
 </details>
 
 ---
+
+<details>
+<summary> API Routes </summary>
 
 #### :coin: /api/tokenExchange
 
@@ -110,3 +113,5 @@ npm run dev # Runs the webserver, and proxies /api to :8000
     "link": "{Link to pdf file}",
 }
 ```
+
+</details>
