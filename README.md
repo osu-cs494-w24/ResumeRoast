@@ -43,7 +43,7 @@ npm run dev # Runs the webserver, and proxies /api to :8000
     "code": "{Authentication Code granted by Dropbox}"
 }
 ```
-<center>:arrow_down:</center>
+<center><p align="center">:arrow_down:</p></center>
 
 ```json
 "status": 200,
@@ -61,7 +61,7 @@ npm run dev # Runs the webserver, and proxies /api to :8000
     "pdf": "{base64 URL encoded PDF file}"
 }
 ```
-<center>:arrow_down:</center>
+<center><p align="center">:arrow_down:</p></center>
 
 ```json
 "status": 200,
@@ -77,7 +77,7 @@ npm run dev # Runs the webserver, and proxies /api to :8000
 "method": "GET",
 "body": {}
 ```
-<center>:arrow_down:</center>
+<center><p align="center">:arrow_down:</p></center>
 
 ```json
 "status": 200,
@@ -92,10 +92,10 @@ npm run dev # Runs the webserver, and proxies /api to :8000
 "method": "GET",
 "body": {
     "id": "{String used to identify user}",
-    "version": "[OPTIONAL] {Number used to identify older resume version}
+    "version": "[OPTIONAL] {Number used to identify older resume version}"
 }
 ```
-<center>:arrow_down:</center>
+<center><p align="center">:arrow_down:</p></center>
 
 ```json
 "status": 200,
