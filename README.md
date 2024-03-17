@@ -35,6 +35,8 @@ npm run dev # Runs the webserver, and proxies /api to :8000
 
 </details>
 
+---
+
 #### :coin: /api/tokenExchange
 
 ```json
