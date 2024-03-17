@@ -129,7 +129,7 @@ npm run dev # Runs the webserver, and proxies /api to :8000
 
 ```json
 "status": 200,
-"content-type": "image/jpeg",
+"content-type": "image/png",
 "body": "{Thumbnail Image Data}"
 ```
 </details>
@@ -169,5 +169,5 @@ reading in `data.json`, and each time a new pdf is added, we modify
 Upon each new resume upload, a thumbnail for the pdf is generated and stored
 in `/thumbnails`. A thumbnail is only kept for the latest pdf generated for
 each user. The thumbnail is named using the Dropbox User ID for the account,
-minus the `dbid:` at the start, and in the `.webp` format. The API route
+minus the `dbid:` at the start, and in the `.png` format. The API route
 `/api/thumbnail` handles removing the `dbid:` from the Dropbox User ID.
