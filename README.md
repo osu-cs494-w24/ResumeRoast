@@ -84,16 +84,20 @@ npm run dev # Runs the webserver, and proxies /api to :8000
 
 ```json
 "status": 200,
-"body": {
-    "links": "{JSON object with latest pdf link for each user}"
-}
+"body": [
+    {
+        "id": "{Dropbox User ID}", 
+        "link": "{Link to this user's latest resume}"
+    }
+]
 ```
 
 #### :green_book: /api/pdf
 
 ```json
 "method": "GET",
-"body": {
+"body": {},
+"queryParameters": {
     "id": "{String used to identify user}",
     "version": "[OPTIONAL] {Number used to identify older resume version}"
 }

@@ -14,7 +14,7 @@ console.log("== client_secret:", client_secret)
 
 const app = express()
 const port = 8000
-let data = JSON.parse(fs.readFileSync('data.json'));
+let pdfLinks = JSON.parse(fs.readFileSync('data.json'));
 let tokens = {};
 
 app.use(express.json())
@@ -92,16 +92,49 @@ app.post("/api/upload", async (req, res) => {
         
         // Path in dropboxResBody.path_lower... Or dropboxResBody.path_display
         // Get Shareable Link!
+        const shareURL = "https://api.dropboxapi.com/2/sharing/create_shared_link_with_settings"
+        const shareData = {
+            "path": dropboxResBody.path_lower,
+            "settings": {
+                "access": "viewer",
+                "allow_download": true,
+                "audience": "public",
+                "requested_visibility": "public"
+            }
+        }
+        const shareOptions = {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + tokens[code].token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(shareData)
+        }
+        const shareRes= await fetch(shareURL, shareOptions);
+        const shareResBody = await shareRes.json()
 
+        if(!pdfLinks[tokens[code].id])
+            pdfLinks[tokens[code].id] = []
+        pdfLinks[tokens[code].id].unshift(shareResBody.url)
 
-        res.status(200).send({msg: "Aha!"})
+        // Update """database"""
+        fs.writeFileSync('data.json', JSON.stringify(pdfLinks));
+
+        res.status(200).send({msg: shareResBody.url})
     }
 });
 app.get("/api/allpdfs", async (req, res) => {
-
+    let links = []
+    for(let id in pdfLinks)
+            links.push({id, link: pdfLinks[id][0]})
+    res.status(200).send(links)
 });
 app.get("/api/pdf", async (req, res) => {
-
+    const { id, version } = req.query
+    if(pdfLinks[id][version? version : 0])
+        res.status(200).send(pdfLinks[id][version? version : 0])
+    else
+        res.status(404).send()
 });
 
 app.listen(port, () => console.log(`API server listening on port ${port}`))
