@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\resume-roast"
+    "\\resume-roast",
+    "\\resume-roast\\src",
+    "\\resume-roast\\src\\components",
+    "\\resume-roast\\src\\pages"
   ],
+  "SelectedNode": "\\resume-roast\\src\\main.jsx",
   "PreviewInSolutionExplorer": false
 }
