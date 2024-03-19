@@ -1,14 +1,37 @@
-@media(prefers-color-scheme: light){
-    .disqusComments{
-        height: 780px;
-        background-image: linear-gradient(to right, lightcyan, violet);
+/* desktop */
+@media only screen and (min-width: 750px) {
+    @media(prefers-color-scheme: light){
+        .disqusComments{
+            height: 780px;
+            background-image: linear-gradient(to right, lightcyan, violet);
+            width: 300px;
+        }
+    }
+    @media(prefers-color-scheme: dark){
+        .disqusComments{
+            height: 780px;
+            border: 10px solid silver;
+            background-color: white;
+            width: 300px;
+        }
     }
 }
 
-@media(prefers-color-scheme: dark){
-    .disqusComments{
-        height: 780px;
-        border: 10px solid silver;
-        background-color: white;
+/* mobile */
+@media only screen and (max-width: 750px) {
+    @media(prefers-color-scheme: light){
+        .disqusComments{
+            background-image: linear-gradient(to right, lightcyan, violet);
+            width: auto;
+            height: 400px;
+        }
+    }
+    @media(prefers-color-scheme: dark){
+        .disqusComments{
+            border: 10px solid silver;
+            background-color: white;
+            width: auto;
+            height: 400px;
+        }
     }
 }
