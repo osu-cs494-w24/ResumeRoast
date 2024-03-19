@@ -2,7 +2,6 @@
     .ResumeViewContainer{
         display: flex;
         margin-top: 50px;
-        background-image: linear-gradient(to right, lightcyan, violet);
     }
 }
 
@@ -22,6 +21,7 @@
     }
     @media(prefers-color-scheme: light){
         .column{
+            background-image: linear-gradient(to right, lightcyan, violet);
             padding: 10px;
         }
     }
@@ -42,6 +42,7 @@
         .column{
             flex: 50%;
             padding: 10px;
+            background-image: linear-gradient(to right, lightcyan, violet);
         }
     }
 }

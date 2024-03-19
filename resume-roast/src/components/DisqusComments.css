@@ -2,16 +2,15 @@
 @media only screen and (min-width: 750px) {
     @media(prefers-color-scheme: light){
         .disqusComments{
-            height: 780px;
+            height: 803px;
             background-image: linear-gradient(to right, lightcyan, violet);
             width: 300px;
         }
     }
     @media(prefers-color-scheme: dark){
         .disqusComments{
-            height: 780px;
-            border: 10px solid silver;
-            background-color: white;
+            height: 803px;
+            background-image: linear-gradient(to right, white, grey);
             width: 300px;
         }
     }
@@ -22,16 +21,12 @@
     @media(prefers-color-scheme: light){
         .disqusComments{
             background-image: linear-gradient(to right, lightcyan, violet);
-            width: auto;
-            height: 400px;
         }
     }
     @media(prefers-color-scheme: dark){
         .disqusComments{
             border: 10px solid silver;
             background-color: white;
-            width: auto;
-            height: 400px;
         }
     }
 }

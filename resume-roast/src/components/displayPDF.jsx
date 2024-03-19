@@ -1,4 +1,5 @@
 import React from "react";
+import './displayPDF.css'
 
 export default function DisplayPDF(props){
     const pdfURL = props
