@@ -5,6 +5,8 @@ import TopBar from "./TopBar";
 import DisqusComments from "../components/DisqusComments"
 import { useParams } from "react-router-dom";
 
+import "./ResumeView.css"
+
 export default function ResumeView(){
     const {id} = useParams()
     const [pdfLink, setPdfLink] = useState("")
@@ -23,8 +25,14 @@ export default function ResumeView(){
     return(
         <div>
             <TopBar />
-            <DisplayPDF pdfUrl={pdfLink}/>
-            <DisqusComments id={id}/>
+            <div className="ResumeViewContainer">
+                <div className="column">
+                    <DisplayPDF pdfUrl={pdfLink}/>
+                </div>
+                <div className="column">
+                    <DisqusComments id={id}/>
+                </div>
+            </div>
         </div>
     )
 }

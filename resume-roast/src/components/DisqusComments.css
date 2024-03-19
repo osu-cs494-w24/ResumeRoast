@@ -1,0 +1,14 @@
+@media(prefers-color-scheme: light){
+    .disqusComments{
+        height: 780px;
+        background-image: linear-gradient(to right, lightcyan, violet);
+    }
+}
+
+@media(prefers-color-scheme: dark){
+    .disqusComments{
+        height: 780px;
+        border: 10px solid silver;
+        background-color: white;
+    }
+}
