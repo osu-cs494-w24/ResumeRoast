@@ -7,9 +7,11 @@ other people's resumes using the Disqus thread linked to each document.
 
 ## Configuration and Hosting
 
-:octocat: **> git clone**
+:octocat: **> git clone && cd ResumeRoast/resume-roast**
 
 :package: **> npm i**
+
+:open_file_folder: **> mkdir thumbnails**
 
 :page_facing_up: **Create .env.local**
 ```toml
@@ -17,10 +19,9 @@ DROPBOX_CLIENT_SECRET="{Get this from Dropbox}" # Or from Will if you are on the
 VITE_DROPBOX_CLIENT_ID="{This is also from Dropbox}" # Or from Will if you are on the team
 VITE_OAUTH_REDIRECT_URL="{Your absolute path to /login (Like http://localhost:5173/login)}"
 ```
-:runner: **Run these in parallel!**
+:runner: **Run this command!**
 ```bash
-npm run api # Runs the backend server on port 8000
-npm run dev # Runs the webserver, and proxies /api to :8000
+npm run host # Runs the server on port 8000
 ```
 ## Routes
 
