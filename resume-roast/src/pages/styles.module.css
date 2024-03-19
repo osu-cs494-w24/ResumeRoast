@@ -23,3 +23,9 @@
 .infoCard h2 {
     margin-bottom: 0;
 }
+
+.infoCard img {
+    max-width: 95%;
+    width: auto;
+    min-height: 250px;
+}
