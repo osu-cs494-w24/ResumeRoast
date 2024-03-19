@@ -1,0 +1,25 @@
+.aboutContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.infoCard {
+    border: 1px solid white;
+    border-radius: 5px;
+    width: 40vw;
+    padding: 15px;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.infoCard p {
+    font-size: 18px;
+    margin: 0;
+}
+
+.infoCard h2 {
+    margin-bottom: 0;
+}
