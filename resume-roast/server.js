@@ -65,9 +65,9 @@ app.post("/api/upload", async (req, res) => {
     const code = req.headers['auth-code']
     const pdf = new Uint8Array(req.body)
     if(!code || !tokens[code]){
-        res.status(400).send({err: "Must specify auth code"})
+        return res.status(400).send({err: "Must specify auth code"})
     } else if(!pdf){
-        res.status(400).send({err: "Must include pdf data"})
+        return res.status(400).send({err: "Must include pdf data"})
     } else {
         const url = "https://content.dropboxapi.com/2/files/upload"
         const args = {
@@ -90,7 +90,7 @@ app.post("/api/upload", async (req, res) => {
         const dropboxResBody = await dropboxRes.json()
         console.log(dropboxResBody)
         if(!dropboxResBody){
-            res.status(500).send({err: "Error uploading pdf to Dropbox"})
+            return res.status(500).send({err: "Error uploading pdf to Dropbox"})
         }
         
         // Path in dropboxResBody.path_lower... Or dropboxResBody.path_display
@@ -117,7 +117,7 @@ app.post("/api/upload", async (req, res) => {
         const shareResBody = await shareRes.json()
         //If the pdf is not changed, the response body won't have a URL
         if(!shareResBody.url)
-            res.status(208).send()
+            return res.status(208).send()
         else{
             //Render a new thumbnail! && Update link database
             console.log("Checking " + "thumbnails/"+tokens[code].id.split(':')[1]+".png")
@@ -145,7 +145,7 @@ app.post("/api/upload", async (req, res) => {
             fs.writeFileSync('data.json', JSON.stringify(pdfLinks));
         }
 
-        res.status(200).send({link: shareResBody.url, version: pdfLinks[tokens[code].id].length})
+        return res.status(200).json({link: shareResBody.url, version: pdfLinks[tokens[code].id].length})
     }
 });
 app.get("/api/allpdfs", async (req, res) => {
