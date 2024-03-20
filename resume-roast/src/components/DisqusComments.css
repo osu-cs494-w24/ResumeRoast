@@ -2,15 +2,15 @@
 @media only screen and (min-width: 750px) {
     @media(prefers-color-scheme: light){
         .disqusComments{
-            height: 1100px;
-            background-image: linear-gradient(to right, lightcyan, violet);
+            height: 1103px;
+            background-image: linear-gradient(to right, maroon, salmon);
             width: 300px;
         }
     }
     @media(prefers-color-scheme: dark){
         .disqusComments{
-            height: 1100px;
-            background-image: linear-gradient(to right, white, grey);
+            height: 1103px;
+            background-image: linear-gradient(to right, rgb(77, 8, 8), rgb(77, 45, 45));
             width: 300px;
         }
     }
@@ -20,13 +20,13 @@
 @media only screen and (max-width: 750px) {
     @media(prefers-color-scheme: light){
         .disqusComments{
-            background-image: linear-gradient(to right, lightcyan, violet);
+            background-image: linear-gradient(to right, maroon, salmon);
         }
     }
     @media(prefers-color-scheme: dark){
         .disqusComments{
             border: 10px solid silver;
-            background-color: white;
+            background-image: linear-gradient(to right, rgb(77, 8, 8), rgb(77, 45, 45));
         }
     }
 }

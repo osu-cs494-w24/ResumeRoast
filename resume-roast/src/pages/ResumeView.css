@@ -21,7 +21,7 @@
     }
     @media(prefers-color-scheme: light){
         .column{
-            background-image: linear-gradient(to right, lightcyan, violet);
+            background-image: linear-gradient(to right, maroon, salmon);
             padding: 10px;
         }
     }
@@ -42,7 +42,7 @@
         .column{
             flex: 50%;
             padding: 10px;
-            background-image: linear-gradient(to right, lightcyan, violet);
+            background-image: linear-gradient(to right, maroon, salmon);
         }
     }
 }
