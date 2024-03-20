@@ -26,11 +26,10 @@ html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 100%;
 }
 
 body {
-    background-color: rgb(153,153,153);
+    background-color: #311;
     position: relative;
     min-width: 320px;
     min-height: 100vh;
@@ -94,8 +93,8 @@ h1 {
 
 }
 
-.TopBar {
-    background-color: rgb(153,153,153);
+img.pdfs {
+    width: 2.5in;
 }
 
 .icons {
@@ -158,7 +157,8 @@ h1 {
 
 .layout {
     display: flex;
-    background-color: rgb(153,153,153);
+    flex-wrap: wrap;
+    justify-content: center;
 }
 .card {
     display: flex;
@@ -172,11 +172,6 @@ h1 {
     top: 0;
     right: 0;
     margin: 20px; /* Adjust margin for spacing */
-}
-
-.pdfs {
-    width: 400px;
-    height: 400px;
 }
 
 

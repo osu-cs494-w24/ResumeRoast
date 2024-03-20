@@ -14,7 +14,7 @@ export default function LoginLink() {
   return (
     <>
       <button className="homepage" onClick={() => console.log('Button clicked!')}>
-        <NavLink to = "/" className = "homelink"> <img src="https://cdn-icons-png.freepik.com/256/10263/10263239.png" alt="Homepage"/> </NavLink>
+        <NavLink to = "/" className = "homelink"> <img src="https://cdn-icons-png.freepik.com/256/10263/10263239.png" alt="Homepage" className="icons"/> </NavLink>
       </button>
 
       <div className="loginWrapper">
