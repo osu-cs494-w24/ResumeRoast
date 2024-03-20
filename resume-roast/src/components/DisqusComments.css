@@ -2,14 +2,14 @@
 @media only screen and (min-width: 750px) {
     @media(prefers-color-scheme: light){
         .disqusComments{
-            height: 803px;
+            height: 1100px;
             background-image: linear-gradient(to right, lightcyan, violet);
             width: 300px;
         }
     }
     @media(prefers-color-scheme: dark){
         .disqusComments{
-            height: 803px;
+            height: 1100px;
             background-image: linear-gradient(to right, white, grey);
             width: 300px;
         }
