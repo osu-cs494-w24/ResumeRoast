@@ -53,8 +53,8 @@ h1 {
 
 .loginCard {
   color: rgb(0,0,0);
-  border: 1px solid white;
-  background-color: lightgrey;
+  border: 1px solid rgb(122, 122, 122);
+  background-color: rgb(122, 122, 122);
   box-shadow: 10px 10px 5px black;
   border-radius: 5px;
   padding: 15px;
@@ -70,9 +70,8 @@ h1 {
 }
 
 .loginCard a {
-  color: rgb(0,0,0);
   border-radius: 8px;
-  background-color: darkgrey;
+  background-color: #1a1a1a;
   padding: 0.6em 1.2em;
   font-size: 18px;
 }
