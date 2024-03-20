@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useCookies } from 'react-cookie'
 import { useDropzone } from 'react-dropzone'
+import {NavLink} from 'react-router-dom'
 
 export default function Login() {
     const [ error, setError ] = useState("")
@@ -51,7 +52,7 @@ export default function Login() {
         <div {...getRootProps()}>
             <input {...getInputProps()} />
             <p>
-                {success && "File uploaded! Check Console."}
+                {success && <NavLink to = "/"> File uploaded! Check Console. </NavLink>}
                 {error && !success && "Error uploading resume."}
                 {!success && !error && "Drag 'n' drop your resume here, or click to select the file"}
             </p>

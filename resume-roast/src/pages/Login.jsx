@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, NavLink } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
 import LoginLink from '../components/LoginLink'
+import TopBar from './TopBar'
 
 export default function Login() {
     const [ error, setError ] = useState("")
@@ -36,8 +37,9 @@ export default function Login() {
 
     return (
         <div>
+            <TopBar />
             {error && !success && <p>Error: {error}</p>}
-            {success ? <p>Success!</p> : <LoginLink />}
+            {success ? <p>Success! Now start  <NavLink to = "/me"> Uploading! </NavLink> </p> : <LoginLink />}
         </div>
     )
 }
