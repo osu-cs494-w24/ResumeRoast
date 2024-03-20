@@ -14,6 +14,8 @@ export default function About() {
                 <div className={styles.infoCard}>
                     <img src={Will} alt="Picture of Will" className="aboutImg"/>
                     <h2>Will Garrison</h2>
+                    <p>Third Year in CS</p>
+                    <p>Does not like the Dropbox API</p>
                 </div>
 
                 <div className={styles.infoCard}>
