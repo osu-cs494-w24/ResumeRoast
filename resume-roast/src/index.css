@@ -119,6 +119,43 @@ h1 {
     margin: 20px; /* Adjust margin for spacing */
 }
 
+.loginCard {
+  color: rgb(0,0,0);
+  border: 1px solid rgb(122, 122, 122);
+  background-color: rgb(122, 122, 122);
+  box-shadow: 10px 10px 5px black;
+  border-radius: 5px;
+  padding: 15px;
+  width: 50vw;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	min-height: 40vh;
+}
+
+.loginCard a {
+  border-radius: 8px;
+  background-color: #1a1a1a;
+  padding: 0.6em 1.2em;
+  font-size: 18px;
+}
+
+.loginCard a:hover {
+  background-color: rgb(220, 68, 5);
+  color: white;
+}
+
+.loginWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
 .layout {
     display: flex;
     background-color: rgb(153,153,153);

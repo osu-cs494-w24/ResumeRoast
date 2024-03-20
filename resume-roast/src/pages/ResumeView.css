@@ -1,0 +1,48 @@
+@media only screen and (min-width: 750px){
+    .ResumeViewContainer{
+        display: flex;
+        margin-top: 50px;
+    }
+}
+
+@media only screen and (max-width: 750px){
+    .ResumeViewContainer{
+        margin-top: 50px;
+    }
+}
+
+/* Mobile color themes */
+@media only screen and (max-width: 750px){
+    @media(prefers-color-scheme: dark){
+        .column{
+            padding: 10px;
+            background-image: linear-gradient(to right, black , grey);
+        }
+    }
+    @media(prefers-color-scheme: light){
+        .column{
+            background-image: linear-gradient(to right, lightcyan, violet);
+            padding: 10px;
+        }
+    }
+}
+
+
+/* Desktop color themes */
+@media only screen and (mix-width: 750px){
+    @media(prefers-color-scheme: dark){
+        .column{
+            flex: 50%;
+            padding: 15px;
+            margin: 10px;
+            background-image: linear-gradient(to right, black , grey);
+        }
+    }
+    @media(prefers-color-scheme: light){
+        .column{
+            flex: 50%;
+            padding: 10px;
+            background-image: linear-gradient(to right, lightcyan, violet);
+        }
+    }
+}

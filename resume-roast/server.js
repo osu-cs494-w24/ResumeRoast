@@ -168,5 +168,8 @@ app.get("/api/thumbnail", async (req, res) => {
     else
         res.status(404).send()
 })
+app.get("/*", async (req, res) => {
+    res.sendFile("dist/index.html", { root : process.cwd()});
+})
 
 app.listen(port, () => console.log(`API server listening on port ${port}`))

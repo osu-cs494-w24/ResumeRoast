@@ -6,6 +6,7 @@ import {Helmet} from 'react-helmet-async'
 import App from './App.jsx'
 import Login from './pages/Login'
 import Upload from './pages/Upload'
+import About from './pages/About'
 
 import './index.css'
 import ResumeView from './pages/ResumeView.jsx'
@@ -18,8 +19,10 @@ const router = createBrowserRouter([
     {
       path: ":userID",
       element: <ResumeView/>
-    }
-  ]}
+    
+    } 
+  ]},
+  { path: "/about", element: <About /> }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
