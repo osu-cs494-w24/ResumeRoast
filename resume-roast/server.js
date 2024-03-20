@@ -1,4 +1,5 @@
 import express from 'express'
+import path from 'path';
 import dotenv from 'dotenv'
 import fs from 'fs'
 import bodyParser from 'body-parser'
@@ -21,6 +22,7 @@ let tokens = {};
 
 app.use(express.json())
 app.use(bodyParser.raw({type: 'application/octet-stream', limit: '150mb'}))
+app.use(express.static(path.join(process.cwd(), 'dist')));
 
 app.post("/api/tokenExchange", async (req, res) => {
     const { code } = req.body
@@ -168,8 +170,21 @@ app.get("/api/thumbnail", async (req, res) => {
     else
         res.status(404).send()
 })
-app.get("/*", async (req, res) => {
+app.get("/login", async (req, res) => {
     res.sendFile("dist/index.html", { root : process.cwd()});
 })
+app.get("/r", async (req, res) => {
+    res.sendFile("dist/index.html", { root : process.cwd()});
+})
+app.get("/me", async (req, res) => {
+    res.sendFile("dist/index.html", { root : process.cwd()});
+})
+app.get("/about", async (req, res) => {
+    res.sendFile("dist/index.html", { root : process.cwd()});
+})
+app.get('/', function (req, res) {
+  res.sendFile(path.join(process.cwd(), 'dist', 'index.html'));
+});
+
 
 app.listen(port, () => console.log(`API server listening on port ${port}`))
