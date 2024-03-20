@@ -12,8 +12,6 @@ export default function TopBar() {
     <NavLink to = "/" className = "homelink"> <img src="https://cdn-icons-png.freepik.com/256/10263/10263239.png" alt="Homepage" className="icons"/> </NavLink>
     </button>
 
-    <h1> Resume Roasts! </h1>
-
     {!showMenu && (
         <button className="popup" onClick={() => setShowMenu(!showMenu)}>
         <img src="https://icons.veryicon.com/png/o/miscellaneous/ionicons-1/ios-settings-5.png" alt="Popup" className="icons"/>
