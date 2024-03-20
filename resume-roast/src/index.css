@@ -22,17 +22,85 @@ a:hover {
   color: #535bf2;
 }
 
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
 body {
-  margin: 0;
-  position: relative;
-  min-width: 320px;
-  min-height: 100vh;
+    background-color: rgb(153,153,153);
+    position: relative;
+    min-width: 320px;
+    min-height: 100vh;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 0;
   padding-bottom: 20px;
+  color: #fff;
+  text-shadow: 0 3px 20px red,
+                0 0 20px red,
+                0 0 10px orange,
+                4px -5px 6px yellow,
+                -4px -10px 10px yellow,
+                0 -10px 30px yellow;
+  animation: fire 2s infinite alternate linear;
+}
+
+@keyframes fire {
+    0% {
+  text-shadow: 0 3px 20px red,
+                0 0 20px red,
+                0 0 10px orange,
+                4px -5px 6px yellow,
+                -4px -10px 10px yellow,
+                0 -10px 30px yellow
+    }
+    25% {
+  text-shadow: 0 3px 20px red,
+                0 0 20px red,
+                0 0 10px orange,
+                4px -5px 6px yellow,
+                -4px -10px 10px yellow,
+                0 -10px 30px yellow
+    }
+    50% {
+  text-shadow: 0 3px 20px red,
+                0 0 20px red,
+                0 0 10px orange,
+                4px -5px 6px yellow,
+                -4px -10px 10px yellow,
+                0 -10px 30px yellow
+    }
+    75% {
+  text-shadow: 0 3px 20px red,
+                0 0 20px red,
+                0 0 10px orange,
+                4px -5px 6px yellow,
+                -4px -10px 10px yellow,
+                0 -10px 30px yellow
+    }
+    100% {
+  text-shadow: 0 3px 20px red,
+                0 0 20px red,
+                0 0 10px orange,
+                4px -5px 6px yellow,
+                -4px -10px 10px yellow,
+                0 -10px 30px yellow
+    }
+
+}
+
+.TopBar {
+    background-color: rgb(153,153,153);
+}
+
+.icons {
+    width: 40px;
+    height: 40px;
 }
 
 .dropdown-menu {
@@ -53,14 +121,15 @@ h1 {
 
 .layout {
     display: flex;
+    background-color: rgb(153,153,153);
 }
 .card {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    border-style: solid;
-    width: 300px
+    padding: 10px;
 }
+
 .popup {
     position: absolute;
     top: 0;
@@ -68,10 +137,12 @@ h1 {
     margin: 20px; /* Adjust margin for spacing */
 }
 
-img {
-    width: 40px;
-    height: 40px;
+.pdfs {
+    width: 400px;
+    height: 400px;
 }
+
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -100,4 +171,13 @@ buton:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* mobile */
+@media only screen and (max-width: 750px) {
+    .TopBar {
+        width: auto;
+        height: 10px;
+        font-size: 2px;
+    }
 }
